@@ -18,41 +18,56 @@ type DemoModalProps = {
   trigger: ReactNode;
 };
 
+type DemoResponse = {
+  isSuccess?: boolean;
+  message?: string;
+};
+
 const fields = [
   { name: "name", label: "Name *", required: true },
   { name: "email", label: "Email *", type: "email", required: true },
-  { name: "enterpriseName", label: "Enterprise Name" },
+  { name: "enterprise_name", label: "Enterprise Name" },
   { name: "role", label: "Role" },
-  { name: "phoneNumber", label: "Phone Number *", type: "tel", required: true },
+  { name: "phone", label: "Phone Number *", type: "tel", required: true },
   { name: "location", label: "Location *", required: true },
 ];
 
 export default function DemoModal({ trigger }: DemoModalProps) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget;
     setStatus("loading");
+    setMessage("");
 
-    const endpoint = process.env.NEXT_PUBLIC_DEMO_ENDPOINT;
-    const payload = Object.fromEntries(new FormData(event.currentTarget));
-
-    if (!endpoint) {
-      setStatus("success");
-      return;
-    }
+    const payload = Object.fromEntries(new FormData(form));
 
     try {
-      const response = await fetch(endpoint, {
+      const response = await fetch("/api/demos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      if (!response.ok) throw new Error("Unable to submit demo request");
+      const result = (await response.json().catch(() => null)) as DemoResponse | null;
+      const isSuccessful =
+        result?.isSuccess === true || (response.ok && result?.isSuccess !== false);
+
+      if (!isSuccessful) {
+        throw new Error(result?.message || "Unable to submit demo request");
+      }
+
+      setMessage(result?.message || "Demo request submitted successfully");
       setStatus("success");
-      event.currentTarget.reset();
-    } catch {
+      form.reset();
+    } catch (error) {
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "The request could not be sent. Please try again.",
+      );
       setStatus("error");
     }
   }
@@ -85,12 +100,12 @@ export default function DemoModal({ trigger }: DemoModalProps) {
 
           {status === "success" && (
             <p className="rounded-[10px] bg-[#EEFDF4] px-4 py-3 text-sm font-medium text-[#127A3A]">
-              Demo request captured. We will connect this to the final endpoint when it is ready.
+              {message || "Demo request submitted. We will reach out to you shortly."}
             </p>
           )}
           {status === "error" && (
             <p className="rounded-[10px] bg-[#FFF1F1] px-4 py-3 text-sm font-medium text-[#B42318]">
-              The request could not be sent. Please try again.
+              {message || "The request could not be sent. Please try again."}
             </p>
           )}
 
