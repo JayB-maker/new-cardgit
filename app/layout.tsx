@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const cardgitArial = localFont({
@@ -64,7 +63,6 @@ export default function RootLayout({
     >
       <body className={`${cardgitArial.className} font-sans antialiased bg-white`}>
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
