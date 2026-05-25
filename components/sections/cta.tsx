@@ -35,7 +35,7 @@ export default function CTA() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild className="btn-lift h-auto bg-white px-6 py-3 text-sm text-[#4055F1] hover:bg-gray-100">
-                <a href="https://www.app.cardgit.com/auth/signup">Create your free card</a>
+                <a target="_blank" href="https://www.app.cardgit.com/auth/signup">Create your free card</a>
               </Button>
               <DemoModal
                 trigger={

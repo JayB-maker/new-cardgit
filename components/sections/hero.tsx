@@ -6,7 +6,10 @@ import DemoModal from "./demo-modal";
 
 export default function Hero() {
   return (
-    <section id="home" className="reveal-section w-full bg-white py-14 md:py-20">
+    <section
+      id="home"
+      className="reveal-section w-full bg-white py-14 md:py-20"
+    >
       <div className="mx-auto px-4 sm:px-6 lg:px-14">
         <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
           {/* Left Content */}
@@ -29,8 +32,16 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild className="btn-lift h-auto rounded-[8px] bg-[#4055F1] px-6 py-3 text-sm text-white hover:bg-[#3245D8]">
-                <a href="https://www.app.cardgit.com/auth/signup">Get Started</a>
+              <Button
+                asChild
+                className="btn-lift h-auto rounded-[8px] bg-[#4055F1] px-6 py-3 text-sm text-white hover:bg-[#3245D8]"
+              >
+                <a
+                  target="_blank"
+                  href="https://www.app.cardgit.com/auth/signup"
+                >
+                  Get Started
+                </a>
               </Button>
               <DemoModal
                 trigger={

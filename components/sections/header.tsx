@@ -60,7 +60,7 @@ export default function Header() {
                 Log in
               </a>
               <Button asChild className="btn-lift h-auto bg-[#4055F1] px-6 py-3 text-white hover:bg-[#3245D8]">
-                <a href="https://www.app.cardgit.com/auth/signup">Get Started</a>
+                <a target="_blank" href="https://www.app.cardgit.com/auth/signup">Get Started</a>
               </Button>
             </div>
 
@@ -112,7 +112,7 @@ export default function Header() {
                   </SheetClose>
                   <SheetClose asChild>
                     <Button asChild className="h-12 rounded-[12px] bg-[#4055F1] text-white hover:bg-[#3245D8]">
-                      <a href="https://www.app.cardgit.com/auth/signup">Get Started</a>
+                      <a target="_blank" href="https://www.app.cardgit.com/auth/signup">Get Started</a>
                     </Button>
                   </SheetClose>
                 </div>
