@@ -5,7 +5,7 @@ import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type Currency = {
-  code: "GBP" | "NGN";
+  code: string;
   symbol: string;
   locale: string;
 };
