@@ -80,25 +80,33 @@ export default function Features() {
   const slidingFeatures = [...features, ...features];
 
   return (
-    <section id="benefits" className="reveal-section w-full bg-gradient-to-b from-[#CFD5FC26] to-[#CFD5FC26] py-14 md:py-24">
-      <div className="mx-auto px-4 sm:px-6 lg:px-18">
+    <section
+      id="benefits"
+      className="reveal-section w-full bg-gradient-to-b from-[#CFD5FC26] to-[#CFD5FC26] py-14 md:py-24"
+    >
+      <Image
+        src={"/assets/benefit-back.png"}
+        alt={`Feature slide background`}
+        fill
+        className="object-cover absolute"
+      />
+      <div className="mx-auto px-0 sm:px-0 lg:px-0 relative z-10">
         <div className="mb-10 space-y-6 text-center md:mb-16">
-          <h2 className="text-3xl lg:text-4xl font-medium text-black">
-            More Than a Card — A Complete Business Growth Tool
+        <h2 className="text-3xl lg:text-4xl font-medium text-[#FFFFFF]">
+            Create the Best Digital Business Card for Modern Networking
           </h2>
-          <p className="text-lg text-[#000000B2] max-w-xl mx-auto leading-relaxed">
-            CardGit helps professionals, teams, and businesses create meaningful
-            connections, generate opportunities, and grow visibility — all from
-            one powerful digital identity platform.
+          <p className="text-lg text-[#FFFFFF] max-w-xl mx-auto leading-relaxed">
+            CardGit helps professionals, teams, and businesses network and create meaningful connections
           </p>
         </div>
 
-        <div className="benefit-marquee overflow-hidden pb-4">
+        {/* <div className="benefit-marquee overflow-hidden pb-4 pt-4"> */}
+        <div className=" benefit-marquee overflow-hidden pb-4 pt-4">
           <div className="benefit-track flex min-w-max gap-6">
             {slidingFeatures.map((feature, idx) => (
               <div
                 key={idx}
-                className="interactive-card scroll-drift h-fit w-80 flex-shrink-0 space-y-8 rounded-[16px] border-[0.5px] border-gray-100 bg-white p-6 shadow-sm"
+                className="interactive-card scroll-drift h-fit w-80 flex-shrink-0 space-y-8 rounded-[16px]! border-[0.5px] border-gray-100 bg-white p-6 shadow-sm"
                 aria-hidden={idx >= features.length}
               >
                 {/* Icon */}

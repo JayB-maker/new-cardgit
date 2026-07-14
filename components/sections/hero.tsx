@@ -24,11 +24,10 @@ export default function Hero() {
             </div>
 
             <p className="text-base max-w-[505px] text-[#000000B2] leading-relaxed">
-              Create interactive digital business cards that help people
-              remember you, contact you instantly, and actually follow up. Used
-              by professionals and teams across the United Kingdom, United
-              States, Europe, Africa, and beyond to simplify networking and
-              business growth.
+              Network Smarter. Generate More Leads. Grow Your Business. Share
+              your professional profile, website, social media, products, and
+              services with a single scan. Build valuable connections and create
+              memorable events with CardGit.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -49,7 +48,7 @@ export default function Hero() {
                     variant="outline"
                     className="btn-lift h-auto rounded-[8px] border-[#4055F1] px-6 py-3 text-sm text-[#4055F1] hover:bg-blue-50"
                   >
-                    Book a Demo
+                    Book a Business Demo
                   </Button>
                 }
               />
@@ -71,7 +70,7 @@ export default function Hero() {
                   height={16}
                 />
                 <p className="text-base text-[#525861]]">
-                  4.9/5 from 1000+ users
+                  Used by UK professionals across industries.
                 </p>
               </div>
             </div>
