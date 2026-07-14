@@ -34,6 +34,10 @@ export default function HowItWorks() {
           <h2 className="text-3xl lg:text-[34px] font-medium text-black">
             Simple. Fast. Effective
           </h2>
+          <p className="text-lg text-[#000000B2] max-w-xl mx-auto leading-relaxed">
+            Create your professional digital identity in minutes and start
+            networking smarter with CardGit.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16 max-w-[1025px] mx-auto ">
@@ -60,7 +64,9 @@ export default function HowItWorks() {
 
                 {/* Text Content */}
                 <div className="space-y-3 text-center px-5 pb-6 pt-8 ">
-                  <h3 className="text-xl font-medium text-black">{step.title}</h3>
+                  <h3 className="text-xl font-medium text-black">
+                    {step.title}
+                  </h3>
                   <p className="text-[#3E4248] text-lg leading-relaxed">
                     {step.description}
                   </p>

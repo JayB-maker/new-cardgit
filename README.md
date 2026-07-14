@@ -17,7 +17,7 @@ Open `http://localhost:3000` in your browser.
 
 Copy `.env.example` to `.env.local` and update the values as needed.
 
-The `/pricing` page reads pricing from server environment variables. Visitors detected from Nigeria through request country headers see naira prices; all other visitors default to pound sterling.
+The `/pricing` page reads its display currency, plan prices, and annual discount percentages from server environment variables. The default values in `.env.example` use pound sterling.
 
 Demo requests and Explore promotions are sent through local API routes that use `CARDGIT_API_BASE_URL`. Promoted card links use `NEXT_PUBLIC_CARDGIT_APP_BASE_URL`.
 

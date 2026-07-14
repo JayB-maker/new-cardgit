@@ -11,6 +11,8 @@ import UseCases from "@/components/sections/use-cases";
 import Features from "@/components/sections/features";
 import FAQ from "@/components/sections/faq";
 import Footer from "@/components/sections/footer";
+import RealFeatures from "@/components/sections/real-feature";
+import DigitalBusiness from "@/components/sections/digital-business";
 
 export default function Home() {
   return (
@@ -19,10 +21,12 @@ export default function Home() {
       <Hero />
       <Features />
       <HowItWorks />
+      <RealFeatures />
       <Explore />
       <SocialProof />
+      <DigitalBusiness />
       <UseCases />
-      <Philosophy />
+      {/* <Philosophy /> */}
       <CTA />
       <FAQ />
       <Footer />

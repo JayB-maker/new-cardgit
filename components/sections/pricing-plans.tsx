@@ -5,7 +5,7 @@ import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type Currency = {
-  code: "GBP" | "NGN";
+  code: string;
   symbol: string;
   locale: string;
 };
@@ -114,7 +114,7 @@ export default function PricingPlans({ currency, plans }: PricingPlansProps) {
                   asChild
                   className="btn-lift mt-auto h-13 rounded-[8px] bg-[#4055F1] text-base text-white hover:bg-[#3245D8]"
                 >
-                  <a href="https://www.app.cardgit.com/auth/signup">
+                  <a target="_blank" href="https://www.app.cardgit.com/auth/signup">
                     {plan.cta}
                   </a>
                 </Button>

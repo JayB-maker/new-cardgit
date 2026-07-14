@@ -48,7 +48,7 @@ type PromotionCard = {
 
 const APP_BASE_URL =
   process.env.NEXT_PUBLIC_CARDGIT_APP_BASE_URL?.replace(/\/$/, "") ||
-  "https://redesignedcardgit.onrender.com";
+  "https://cardgit.com";
 
 function getYouTubeEmbedUrl(url?: string | null) {
   if (!url) return null;
@@ -183,6 +183,19 @@ function PromotionSkeletonRows() {
   );
 }
 
+function PromotionEmptyState() {
+  return (
+    <div className="flex min-h-[356px] items-center justify-center rounded-xl border border-dashed border-[#C9D0F8] bg-white px-6 py-12 text-center">
+      <div className="max-w-[320px] space-y-2">
+        <p className="font-semibold text-[#070B18]">No promotions available yet</p>
+        <p className="text-sm leading-6 text-[#5D6472]">
+          Featured cards and products will appear here once they are available.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function Explore() {
   const [cardPromotions, setCardPromotions] = useState<PromotionCard[]>([]);
   const [productPromotions, setProductPromotions] = useState<PromotionCard[]>(
@@ -275,6 +288,9 @@ export default function Explore() {
       products: productPromotions.filter(matches),
     };
   }, [cardPromotions, productPromotions, query]);
+  const hasPromotions = cardPromotions.length > 0 || productPromotions.length > 0;
+  const hasFilteredPromotions =
+    filteredRows.cards.length > 0 || filteredRows.products.length > 0;
 
   return (
     <section
@@ -315,7 +331,10 @@ export default function Explore() {
               asChild
               className="btn-lift h-auto w-fit rounded-[8px] bg-[#4055F1] px-6 py-3 text-sm text-white hover:bg-[#3245D8]"
             >
-              <a href="https://app.cardgit.com/dashboard/explore">
+              <a
+                target="_blank"
+                href="https://app.cardgit.com/dashboard/explore"
+              >
                 Explore Now
               </a>
             </Button>
@@ -338,6 +357,7 @@ export default function Explore() {
                   <ChevronDown className="h-4 w-4" />
                 </button>
                 <a
+                  target="_blank"
                   href="https://app.cardgit.com/dashboard/explore"
                   className="flex rounded-[8px] border-[0.5px] border-[#0000001F] bg-white px-4 py-3 text-sm transition hover:-translate-y-0.5 hover:bg-gray-50 hover:shadow-sm"
                 >
@@ -346,9 +366,7 @@ export default function Explore() {
               </div>
             </div>
 
-            {status === "loading" && (
-              <PromotionSkeletonRows />
-            )}
+            {status === "loading" && <PromotionSkeletonRows />}
 
             {status === "error" && (
               <div className="rounded-xl border border-[#FFD0D0] bg-white px-5 py-4 text-sm font-medium text-[#B42318]">
@@ -358,22 +376,33 @@ export default function Explore() {
 
             {status === "success" && (
               <div className="space-y-4">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                  {filteredRows.cards.map((item) => (
-                    <PromotionTile key={item.id} item={item} />
-                  ))}
-                </div>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                  {filteredRows.products.map((item) => (
-                    <PromotionTile key={item.id} item={item} />
-                  ))}
-                </div>
-                {filteredRows.cards.length === 0 &&
-                  filteredRows.products.length === 0 && (
+                {!hasPromotions && <PromotionEmptyState />}
+
+                {hasPromotions && (
+                  <>
+                    {filteredRows.cards.length > 0 && (
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                        {filteredRows.cards.map((item) => (
+                          <PromotionTile key={item.id} item={item} />
+                        ))}
+                      </div>
+                    )}
+
+                    {filteredRows.products.length > 0 && (
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                        {filteredRows.products.map((item) => (
+                          <PromotionTile key={item.id} item={item} />
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+
+                {hasPromotions && !hasFilteredPromotions && (
                     <div className="rounded-xl border border-gray-200 bg-white px-5 py-4 text-sm font-medium text-[#3E4248]">
                       No promotions match your search.
                     </div>
-                  )}
+                )}
               </div>
             )}
           </div>

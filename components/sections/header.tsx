@@ -28,7 +28,10 @@ export default function Header() {
         <div className="mx-auto px-4 sm:px-6 lg:px-14">
           <div className="flex h-20 items-center justify-between">
             {/* Logo */}
-            <Link href="/#home" className="smooth-link rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4055F1]">
+            <Link
+              href="/#home"
+              className="smooth-link rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4055F1]"
+            >
               <Image
                 src="/assets/cardgit-logo.png"
                 alt="CardGit Logo"
@@ -59,8 +62,16 @@ export default function Header() {
               >
                 Log in
               </a>
-              <Button asChild className="btn-lift h-auto bg-[#4055F1] px-6 py-3 text-white hover:bg-[#3245D8]">
-                <a href="https://www.app.cardgit.com/auth/signup">Get Started</a>
+              <Button
+                asChild
+                className="btn-lift h-auto bg-[#4055F1] px-6 py-3 text-white hover:bg-[#3245D8]"
+              >
+                <a
+                  target="_blank"
+                  href={process.env.NEXT_PUBLIC_DISCOVER_EVENTS_URL}
+                >
+                  Discover Events
+                </a>
               </Button>
             </div>
 
@@ -86,7 +97,8 @@ export default function Header() {
                     />
                   </SheetTitle>
                   <SheetDescription className="sr-only">
-                    Mobile navigation menu for CardGit website pages and actions.
+                    Mobile navigation menu for CardGit website pages and
+                    actions.
                   </SheetDescription>
                 </SheetHeader>
                 <div className="flex flex-col gap-2 p-5">
@@ -111,8 +123,16 @@ export default function Header() {
                     </a>
                   </SheetClose>
                   <SheetClose asChild>
-                    <Button asChild className="h-12 rounded-[12px] bg-[#4055F1] text-white hover:bg-[#3245D8]">
-                      <a href="https://www.app.cardgit.com/auth/signup">Get Started</a>
+                    <Button
+                      asChild
+                      className="h-12 rounded-[12px] bg-[#4055F1] text-white hover:bg-[#3245D8]"
+                    >
+                      <a
+                        target="_blank"
+                        href={process.env.NEXT_PUBLIC_DISCOVER_EVENTS_URL}
+                      >
+                        Discover Events
+                      </a>
                     </Button>
                   </SheetClose>
                 </div>

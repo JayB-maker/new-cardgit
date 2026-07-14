@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import Footer from "@/components/sections/footer";
 import Header from "@/components/sections/header";
 import PricingPlans from "@/components/sections/pricing-plans";
@@ -12,44 +11,38 @@ export const metadata: Metadata = {
     "Choose a CardGit plan for digital business cards, team cards, analytics, branded templates, and smarter professional networking.",
 };
 
-function envNumber(name: string, fallback: number) {
+function envNumber(name: string) {
   const value = process.env[name];
-  if (!value) return fallback;
+  if (!value) return 0;
 
   const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : fallback;
+  return Number.isFinite(parsed) ? parsed : 0;
 }
 
-async function getCountryCode() {
-  const headerStore = await headers();
-  return (
-    headerStore.get("x-vercel-ip-country") ||
-    headerStore.get("cf-ipcountry") ||
-    headerStore.get("x-country-code") ||
-    ""
-  ).toUpperCase();
+function envString(name: string, fallback: string) {
+  return process.env[name] || fallback;
 }
 
-export default async function PricingPage() {
-  const country = await getCountryCode();
-  const isNigeria = country === "NG";
-  const currency = isNigeria
-    ? { code: "NGN" as const, symbol: "₦", locale: "en-NG" }
-    : { code: "GBP" as const, symbol: "£", locale: "en-GB" };
+function envDiscount(name: string) {
+  const value = process.env[name];
+  if (!value) return undefined;
 
-  const prices = isNigeria
-    ? {
-        premiumMonthly: envNumber("CARDGIT_PRICE_PREMIUM_MONTHLY_NGN", 8500),
-        premiumAnnual: envNumber("CARDGIT_PRICE_PREMIUM_ANNUAL_NGN", 7200),
-        teamMonthly: envNumber("CARDGIT_PRICE_TEAM_MONTHLY_NGN", 20000),
-        teamAnnual: envNumber("CARDGIT_PRICE_TEAM_ANNUAL_NGN", 17000),
-      }
-    : {
-        premiumMonthly: envNumber("CARDGIT_PRICE_PREMIUM_MONTHLY_GBP", 5.1),
-        premiumAnnual: envNumber("CARDGIT_PRICE_PREMIUM_ANNUAL_GBP", 4.35),
-        teamMonthly: envNumber("CARDGIT_PRICE_TEAM_MONTHLY_GBP", 12),
-        teamAnnual: envNumber("CARDGIT_PRICE_TEAM_ANNUAL_GBP", 10),
-      };
+  return value.trim().endsWith("%") ? value.trim() : `${value.trim()}%`;
+}
+
+export default function PricingPage() {
+  const currency = {
+    code: envString("CARDGIT_PRICE_CURRENCY_CODE", "GBP"),
+    symbol: envString("CARDGIT_PRICE_CURRENCY_SYMBOL", "£"),
+    locale: envString("CARDGIT_PRICE_CURRENCY_LOCALE", "en-GB"),
+  };
+
+  const prices = {
+    premiumMonthly: envNumber("CARDGIT_PRICE_PREMIUM_MONTHLY"),
+    premiumAnnual: envNumber("CARDGIT_PRICE_PREMIUM_ANNUAL"),
+    teamMonthly: envNumber("CARDGIT_PRICE_TEAM_MONTHLY"),
+    teamAnnual: envNumber("CARDGIT_PRICE_TEAM_ANNUAL"),
+  };
 
   const plans = [
     {
@@ -74,7 +67,7 @@ export default async function PricingPage() {
       annual: prices.premiumAnnual,
       monthlyNote: "per month",
       annualNote: "Annually",
-      annualSaving: "14.7%",
+      annualSaving: envDiscount("CARDGIT_PRICE_PREMIUM_ANNUAL_DISCOUNT_PERCENT"),
       cta: "Get Premium",
       highlighted: true,
       features: [
@@ -92,7 +85,7 @@ export default async function PricingPage() {
       annual: prices.teamAnnual,
       monthlyNote: "per month • min 3 users",
       annualNote: "Annually • min 3 users",
-      annualSaving: "16.7%",
+      annualSaving: envDiscount("CARDGIT_PRICE_TEAM_ANNUAL_DISCOUNT_PERCENT"),
       cta: "Get Team",
       features: [
         { label: "Create up to 12 cards", included: true },

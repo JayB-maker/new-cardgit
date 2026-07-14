@@ -100,10 +100,10 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 text-base text-white">
           <p>© {year} CardGit. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition">
+            <a target="_blank" href="#" className="hover:text-white transition">
               Privacy Policy
             </a>
-            <a href="#" className="hover:text-white transition">
+            <a target="_blank" href="#" className="hover:text-white transition">
               Terms & Conditions
             </a>
           </div>
